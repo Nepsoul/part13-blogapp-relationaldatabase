@@ -1,0 +1,2 @@
+insert into blogs (title, url, author, likes) values ('Relational databases rule the world', 'https://himalayan.com', 'ram', 3);
+insert into blogs (title, url, author, likes) values ('MongoDB is webscale', 'http://himalayan.com', 'sita', 8);
