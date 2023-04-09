@@ -4,7 +4,7 @@ CREATE TABLE blogs (
     title text NOT NULL,
     url text NOT NULL,
     author text NOT NULL,
-    likes text NOT NULL
+    likes integer NULL
    );
 
    -- select the blog table
@@ -16,3 +16,7 @@ insert into blogs (title, url, author, likes) values ('MongoDB is webscale', 'ht
 
 -- to delete blog
 drop table blogs
+
+--to alter the data type
+ALTER TABLE blogs
+ALTER COLUMN likes TYPE INTEGER USING likes::integer;

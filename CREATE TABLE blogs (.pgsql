@@ -3,5 +3,5 @@ CREATE TABLE blogs (
     title text NOT NULL,
     url text NOT NULL,
     author text NOT NULL,
-    likes text NOT NULL
+    likes integer NULL
    );
