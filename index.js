@@ -1,7 +1,9 @@
-require("dotenv").config();
+// require("dotenv").config();
 const { Sequelize, Model, DataTypes } = require("sequelize");
 const express = require("express");
 const app = express();
+
+const { PORT } = require("./utils/config");
 
 //middleware to parse incoming JSON data
 app.use(express.json()); //for post api
@@ -99,7 +101,7 @@ app.delete("/api/blogs/:id", async (req, res) => {
 });
 
 //start the server
-const PORT = process.env.PORT || 3001;
+//const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`server running on port ${PORT}`);
 });
