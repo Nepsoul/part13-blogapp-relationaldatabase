@@ -5,11 +5,22 @@ POST http://localhost:3001/api/blogs
 Content-Type: application/json
 
 {
-    "title":"using Postgres",
+    "title":"testing",
     "url":"http://nepal.com",
-    "author":"baas",
+    "author":"yrlo",
     "likes":2
 }
 
 ###
-DELETE http://localhost:3001/api/blogs/15
+DELETE http://localhost:3001/api/blogs/5
+
+###
+PUT http://localhost:3001/api/blogs/4
+Content-Type: application/json
+
+{
+   "title": "checking Connection",
+    "url": "http://nepal.com",
+    "author": "baas",
+    "likes": 5
+}
