@@ -1,6 +1,7 @@
 // require("dotenv").config();
-const { Sequelize, Model, DataTypes } = require("sequelize");
+//const { Sequelize, Model, DataTypes } = require("sequelize");
 const express = require("express");
+require("express-async-errors");
 const app = express();
 
 const { PORT } = require("./utils/config");
