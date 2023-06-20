@@ -1,10 +1,11 @@
 const router = require("express").Router();
 const { Blog } = require("../models");
 
-const blogFinder = async (req, res, next) => {
-  req.blog = await Blog.findByPk(req.params.id);
-  next();
-};
+// const blogFinder = async (req, res) => {
+//   req.blog = await Blog.findByPk(req.params.id);
+//   //console.log(req.blog.toJSON(), "id");
+//   //next();
+// };
 
 router.get("/", async (req, res) => {
   const blogs = await Blog.findAll();
@@ -15,11 +16,11 @@ router.get("/", async (req, res) => {
   res.json(blogs);
 });
 
-router.get("/:id", blogFinder, async (req, res) => {
-  //   const blog = await Blog.findByPk(req.params.id);
-  if (req.blog) {
+router.get("/:id", async (req, res) => {
+  const blog = await Blog.findByPk(req.params.id);
+  if (blog) {
     console.log(req.blog.toJSON(), "single blog");
-    res.json(req.blog);
+    res.json(blog);
   } else {
     res.status(404).end();
   }
@@ -29,7 +30,7 @@ router.get("/:id", blogFinder, async (req, res) => {
 //route to handle incoming POST requests
 router.post("/", async (req, res) => {
   try {
-    console.log(req.body, "req.body");
+    // console.log(req.body, "req.body");
     const blog = await Blog.create(req.body);
 
     //do something with the user data
@@ -39,26 +40,28 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.delete("/:id", blogFinder, async (req, res) => {
+router.delete("/:id", async (req, res) => {
+  //debugger;
   const id = req.params.id;
   try {
-    //     const result = await Blog.findByPk(id);
-    console.log(result, "result");
-    if (req.result) {
-      await req.result.destroy();
+    const result = await Blog.findByPk(id);
+    // console.log(result, "result");
+    if (result) {
+      await result.destroy();
     }
-    res.status(204).json({ message: "blog deleted successfully" }).end();
+    res.status(401).json({ message: "blog deleted successfully" });
   } catch (error) {
     console.log(error);
     res.status(500).send("error occured to delete blog");
   }
 });
 
-router.put("/:id", blogFinder, async (req, res) => {
-  if (req.blog) {
-    req.blog.likes = req.body.likes;
-    await req.blog.save();
-    res.json(req.blog);
+router.put("/:id", async (req, res) => {
+  const blog = await Blog.findByPk(req.params.id);
+  if (blog) {
+    blog.likes = req.body.likes;
+    await blog.save();
+    res.json(blog);
   } else {
     req.status(404).end();
   }
